@@ -11,7 +11,7 @@ class ApiBloc implements BlocBase{
 
   List<Game> gamelist = [];
   BehaviorSubject<List<Game>> _subjectlist;
-  
+  bool testapi;
 
 
 
@@ -35,7 +35,13 @@ class ApiBloc implements BlocBase{
   void getGames2() async{
     List<Game> games = await Api.api.getGames();
     _subjectlist.sink.add(games);
+    if(games.isEmpty || games == null){
+      testapi=false;
+    }else{
+      testapi=true;
+    }
   }
+
 
 
   /*void dispatch(ApiEvent event){

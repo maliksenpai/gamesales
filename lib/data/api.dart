@@ -9,11 +9,13 @@ class Api{
 
   String url = "https://www.cheapshark.com/api/1.0/deals";
   static final Api api = Api._();
+  bool apitest;
 
 
   Future<List<Game>> getGames() async{
     final response = await http.get(url);
     if(response.statusCode==200){
+      apitest=true;
       List<dynamic> body = json.decode(response.body) as List;
       List<Game> games=[];
       for(var item in body){
@@ -23,6 +25,8 @@ class Api{
       //games = new List<Game>.from(body);
       //var games = (body as List).map((e) => Game.fromJson(e)).toList();
       return games;
+    }else{
+      apitest=false;
     }
 
     //log(list.toString());
